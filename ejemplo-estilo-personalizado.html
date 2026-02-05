@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo personalizado</title>
+    <link rel="stylesheet" href="mes-selector.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 100vw;
+        }
+        /* personalizar mes-select */
+        .mes-selector-header {
+            padding: 4px 40px ;
+            border: 1px solid #ddd !important;
+            border-radius: 6px !important;
+            min-height: 28px !important;
+        }
+        .mes-selector-header:hover {
+            border-color: #86b7fe !important;
+            box-shadow: 0 4px 15px rgba(134,183,254, 0.1) !important;
+        }
+        .mes-selector-header.active {
+            border-color: #86b7fe !important;
+            box-shadow: 0 0 0 4px rgba(134,183,254, 0.4) !important;
+        }
+.mes-selector-header .icon {
+    font-size: 18px !important;
+}
+    </style>
+</head>
+<body>
+    <div style="display: grid; align-items: center;">
+        <!-- Input oculto para el valor real -->
+        <input type="hidden" id="mes1" name="mes" required>
+        <!-- Componente visual (se inicializa con JS) -->
+        <div class="mes-selector" id="selector1"></div>                
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <input type="hidden" id="mes2" name="mes2" required>
+        <!-- Componente visual (se inicializa con JS) -->
+        <div class="mes-selector" id="selector2"></div>   
+    </div>
+
+    <script src="mes-selector.js"></script>
+    <script>
+        // Inicializar el selector de mes
+        document.addEventListener('DOMContentLoaded', function() {
+            const selector = new MesSelector('selector1', 'mes1');
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const selector = new MesSelector('selector2', 'mes2', {
+                placeholder: 'Selecciona un mes',
+                showIcon: false,
+                locale: 'en'
+            });
+        });
+    </script>
+    
+</body>
+</html>

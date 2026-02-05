@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Cierre en Desktop</title>
+    <link rel="stylesheet" href="mes-selector.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 40px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .test-area {
+            border: 2px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+        }
+        
+        .test-area h3 {
+            margin-top: 0;
+            color: #4a5568;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .instructions {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .instructions h4 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6c63ff;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: #5a52d5;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #e6fffa;
+            border-left: 4px solid #38b2ac;
+        }
+        
+        .status.open {
+            background: #fed7d7;
+            border-left-color: #f56565;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Prueba de Cierre en Desktop</h1>
+        
+        <div class="test-area">
+            <h3>Prueba 1: Clic fuera del selector (Desktop)</h3>
+            <div class="form-group">
+                <label for="mesTest">Selector de mes:</label>
+                <input type="hidden" id="mesTest" name="mes">
+                <div class="mes-selector-container" id="selectorTest"></div>
+            </div>
+            
+            <div class="instructions">
+                <h4>Instrucciones para probar:</h4>
+                <ul>
+                    <li><strong>1.</strong> Haz clic en el selector para abrirlo</li>
+                    <li><strong>2.</strong> Haz clic en cualquier lugar FUERA del selector</li>
+                    <li><strong>3.</strong> El selector debería cerrarse automáticamente</li>
+                    <li><strong>4.</strong> También prueba presionar la tecla ESC</li>
+                </ul>
+            </div>
+            
+            <div class="demo-buttons">
+                <button class="btn" onclick="openSelector()">Abrir Selector</button>
+                <button class="btn" onclick="closeSelector()">Cerrar Selector</button>
+                <button class="btn" onclick="checkStatus()">Ver Estado</button>
+            </div>
+            
+            <div class="status" id="status">
+                Estado: Cerrado
+            </div>
+        </div>
+        
+        <div class="test-area">
+            <h3>Prueba 2: Múltiples Selectores</h3>
+            <p>Prueba que cada selector funcione independientemente.</p>
+            
+            <div class="form-group">
+                <label for="mesA">Selector A:</label>
+                <input type="hidden" id="mesA" name="mesA">
+                <div class="mes-selector-container" id="selectorA"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="mesB">Selector B:</label>
+                <input type="hidden" id="mesB" name="mesB">
+                <div class="mes-selector-container" id="selectorB"></div>
+            </div>
+        </div>
+        
+        <div class="test-area">
+            <h3>Prueba 3: Configuración Personalizada</h3>
+            
+            <div class="form-group">
+                <label for="mesCustom">Selector sin cerrar al hacer clic fuera:</label>
+                <input type="hidden" id="mesCustom" name="mesCustom">
+                <div class="mes-selector-container" id="selectorCustom"></div>
+            </div>
+            
+            <p><small><em>Configuración: <code>closeOnClickOutside: false</code></em></small></p>
+        </div>
+    </div>
+    
+    <script src="mes-selector.js"></script>
+    <script>
+        let selectorTest, selectorA, selectorB, selectorCustom;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selector de prueba principal
+            selectorTest = new MesSelector('selectorTest', 'mesTest', {
+                placeholder: 'Prueba clic fuera',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                closeOnClickOutside: true,
+                onOpen: function() {
+                    updateStatus(true);
+                },
+                onClose: function() {
+                    updateStatus(false);
+                }
+            });
+            
+            // Múltiples selectores
+            selectorA = new MesSelector('selectorA', 'mesA', {
+                placeholder: 'Selector A',
+                showIcon: true,
+                closeOnClickOutside: true
+            });
+            
+            selectorB = new MesSelector('selectorB', 'mesB', {
+                placeholder: 'Selector B',
+                showIcon: false,
+                closeOnClickOutside: true
+            });
+            
+            // Selector personalizado (no cierra con clic fuera)
+            selectorCustom = new MesSelector('selectorCustom', 'mesCustom', {
+                placeholder: 'No cierra con clic fuera',
+                showIcon: true,
+                closeOnClickOutside: false,
+                onOpen: function() {
+                    console.log('Selector custom abierto (no cierra con clic fuera)');
+                }
+            });
+        });
+        
+        function openSelector() {
+            selectorTest.open();
+        }
+        
+        function closeSelector() {
+            selectorTest.close();
+        }
+        
+        function checkStatus() {
+            alert(`Estado del selector:\n\nAbierto: ${selectorTest.isOpen}\nValor: ${selectorTest.getValue() || 'Vacío'}`);
+        }
+        
+        function updateStatus(isOpen) {
+            const statusEl = document.getElementById('status');
+            if (isOpen) {
+                statusEl.textContent = 'Estado: ABIERTO (haz clic fuera o presiona ESC)';
+                statusEl.className = 'status open';
+            } else {
+                statusEl.textContent = 'Estado: CERRADO';
+                statusEl.className = 'status';
+            }
+        }
+        
+        // También puedes probar manualmente en consola:
+        console.log('Pruebas disponibles:');
+        console.log('1. selectorTest.open()');
+        console.log('2. selectorTest.close()');
+        console.log('3. selectorTest.setValue("2024-06")');
+        console.log('4. selectorTest.getValue()');
+        
+        // Agregar elementos para hacer clic fuera
+        document.addEventListener('click', function(e) {
+            console.log('Click en:', e.target.tagName, e.target.className);
+        });
+    </script>
+</body>
+</html>

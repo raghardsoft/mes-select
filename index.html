@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MesSelector - Icono Opcional y Overlay Móvil</title>
+    <link rel="stylesheet" href="mes-selector.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f8f9fa;
+            min-height: 150vh; /* Para probar scroll */
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+        }
+        
+        .demo-section h2 {
+            color: #444;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #6c63ff;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #5a52d5;
+            transform: translateY(-1px);
+        }
+        
+        .btn-success {
+            background: #48bb78;
+        }
+        
+        .btn-danger {
+            background: #f56565;
+        }
+        
+        .btn-info {
+            background: #4299e1;
+        }
+        
+        .btn-warning {
+            background: #ed8936;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .result {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .demo-section {
+                padding: 20px;
+            }
+            
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .dark-bg {
+            background: #2d3748;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .mobile-test {
+            border: 2px dashed #4299e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .color-preview {
+            display: inline-flex;
+            align-items: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+        }
+        
+        .color-today-light {
+            background: #f1f8e9;
+            border-color: #4CAF50;
+        }
+        
+        .color-today-dark {
+            background: rgba(72, 187, 120, 0.1);
+            border-color: #48bb78;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📅 MesSelector - Icono Opcional y Overlay Móvil</h1>
+        
+        <div class="mobile-test">
+            <h3>📱 Prueba en Móvil o Pantalla Pequeña</h3>
+            <p>Redimensiona la ventana o usa DevTools móvil para probar el overlay.</p>
+            <p><strong>Característica:</strong> El scroll se bloquea cuando el selector está abierto.</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Ejemplo 1: Con y Sin Icono</h2>
+            
+            <div class="grid-2">
+                <div>
+                    <label for="mes1">Con icono (default):</label>
+                    <input type="hidden" id="mes1" name="mes">
+                    <div class="mes-selector-container" id="selector1"></div>
+                </div>
+                
+                <div>
+                    <label for="mes2">Sin icono:</label>
+                    <input type="hidden" id="mes2" name="mes">
+                    <div class="mes-selector-container" id="selector2"></div>
+                </div>
+            </div>
+            
+            <div class="code-block">
+// Con icono (default)
+const selector1 = new MesSelector('selector1', 'mes1', {
+    placeholder: 'Con icono 📅',
+    showIcon: true,  // Default
+    showTodayBtn: true,
+    showClearBtn: true
+});
+
+// Sin icono
+const selector2 = new MesSelector('selector2', 'mes2', {
+    placeholder: 'Sin icono',
+    showIcon: false,  // Icono oculto
+    showTodayBtn: true,
+    showClearBtn: true
+});</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Ejemplo 2: Corrección de Color "Mes Actual"</h2>
+            <p>Ahora el mes actual tiene mejor contraste en tema claro.</p>
+            
+            <div class="color-preview">
+                <div class="color-box color-today-light"></div>
+                <span>Tema claro: Verde claro con texto verde oscuro</span>
+            </div>
+            
+            <div class="color-preview" style="background: #2d3748; color: white;">
+                <div class="color-box color-today-dark"></div>
+                <span>Tema oscuro: Verde transparente con texto verde brillante</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="mes3">Prueba el mes actual (abre el selector):</label>
+                <input type="hidden" id="mes3" name="mes">
+                <div class="mes-selector-container" id="selector3"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn" onclick="irA2024()">Ir a 2024</button>
+                <button class="btn" onclick="irA2025()">Ir a 2025</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Ejemplo 3: Overlay en Móvil</h2>
+            <p>En pantallas pequeñas, se muestra un overlay que bloquea el scroll.</p>
+            
+            <div class="form-group">
+                <label for="mes4">Selector con overlay móvil:</label>
+                <input type="hidden" id="mes4" name="mes">
+                <div class="mes-selector-container" id="selector4"></div>
+            </div>
+            
+            <div class="code-block">
+const selector4 = new MesSelector('selector4', 'mes4', {
+    placeholder: 'Prueba en móvil',
+    mobileOverlay: true,  // Default: true
+    showIcon: true,
+    showTodayBtn: true,
+    showClearBtn: true
+});
+
+// Para desactivar el overlay en móvil:
+// mobileOverlay: false</div>
+            
+            <div class="controls">
+                <button class="btn" onclick="toggleOverlaySetting()">Alternar Overlay Móvil</button>
+                <button class="btn btn-info" onclick="checkMobileMode()">Ver modo actual</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Ejemplo 4: Tema Dark Mejorado</h2>
+            
+            <div class="dark-bg">
+                <div class="grid-2">
+                    <div>
+                        <label style="color: white;">Con icono:</label>
+                        <input type="hidden" id="mes5">
+                        <div class="mes-selector-container" id="selector5"></div>
+                    </div>
+                    
+                    <div>
+                        <label style="color: white;">Sin icono:</label>
+                        <input type="hidden" id="mes6">
+                        <div class="mes-selector-container" id="selector6"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="code-block">
+// Tema dark con icono
+const selector5 = new MesSelector('selector5', 'mes5', {
+    placeholder: 'Dark con icono',
+    theme: 'dark',
+    showIcon: true,
+    showTodayBtn: true,
+    showClearBtn: true,
+    mobileOverlay: true
+});
+
+// Tema dark sin icono
+const selector6 = new MesSelector('selector6', 'mes6', {
+    placeholder: 'Dark sin icono',
+    theme: 'dark',
+    showIcon: false,
+    showTodayBtn: false,
+    showClearBtn: true,
+    mobileOverlay: true
+});</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Ejemplo 5: Configuración Completa</h2>
+            
+            <div class="grid-3">
+                <div>
+                    <label>Configuración A:</label>
+                    <input type="hidden" id="mesA">
+                    <div class="mes-selector-container" id="selectorA"></div>
+                    <small>Sin icono, sin botones</small>
+                </div>
+                
+                <div>
+                    <label>Configuración B:</label>
+                    <input type="hidden" id="mesB">
+                    <div class="mes-selector-container" id="selectorB"></div>
+                    <small>Con icono, overlay móvil</small>
+                </div>
+                
+                <div>
+                    <label>Configuración C:</label>
+                    <input type="hidden" id="mesC">
+                    <div class="mes-selector-container" id="selectorC"></div>
+                    <small>Compacto, sin overlay</small>
+                </div>
+            </div>
+            
+            <div class="code-block">
+// Configuración A: Mínima
+const selectorA = new MesSelector('selectorA', 'mesA', {
+    placeholder: 'Mínima',
+    showIcon: false,
+    showTodayBtn: false,
+    showClearBtn: false,
+    showYearNav: false,
+    mobileOverlay: false
+});
+
+// Configuración B: Estándar
+const selectorB = new MesSelector('selectorB', 'mesB', {
+    placeholder: 'Estándar',
+    showIcon: true,
+    showTodayBtn: true,
+    showClearBtn: true,
+    showYearNav: true,
+    mobileOverlay: true
+});
+
+// Configuración C: Compacta
+const selectorC = new MesSelector('selectorC', 'mesC', {
+    placeholder: 'Compacta',
+    theme: 'compact',
+    showIcon: true,
+    showTodayBtn: true,
+    showClearBtn: false,
+    mobileOverlay: false
+});</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📚 Todas las Opciones Disponibles</h2>
+            
+            <div class="code-block">
+new MesSelector(containerId, inputId, {
+    // Icono y apariencia
+    showIcon: true,         // Mostrar icono de calendario
+    theme: 'default',       // 'default', 'dark', 'compact'
+    
+    // Controles visibles
+    showTodayBtn: true,     // Mostrar botón "Mes actual"
+    showClearBtn: true,     // Mostrar botón "Limpiar"
+    showYearNav: true,      // Mostrar navegación de años
+    
+    // Comportamiento móvil
+    mobileOverlay: true,    // Usar overlay en móviles
+    
+    // Fechas límite
+    minDate: '2020-01',     // String 'YYYY-MM' o Date
+    maxDate: '2030-12',     // String 'YYYY-MM' o Date
+    
+    // Opciones básicas
+    placeholder: 'Selecciona un mes',
+    required: false,
+    locale: 'es',           // 'es' o 'en'
+    disabled: false,
+    
+    // Callbacks
+    onChange: function(value, date) {
+        // value: 'YYYY-MM' (para MySQL)
+        // date: Date object
+    }
+});
+
+// Ejemplos prácticos:
+// 1. Selector limpio: {showIcon: false, showTodayBtn: false, showClearBtn: false}
+// 2. Solo lectura: {disabled: true}
+// 3. Para formularios: {required: true, showClearBtn: false}
+// 4. En móvil sin overlay: {mobileOverlay: false}
+// 5. Tema oscuro compacto: {theme: 'dark', showIcon: false}</div>
+        </div>
+    </div>
+    
+    <script src="mes-selector.js"></script>
+    <script>
+        // Variables globales para los selectores
+        let selector1, selector2, selector3, selector4;
+        let selector5, selector6, selectorA, selectorB, selectorC;
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ejemplo 1: Con y sin icono
+            selector1 = new MesSelector('selector1', 'mes1', {
+                placeholder: 'Con icono 📅',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            selector2 = new MesSelector('selector2', 'mes2', {
+                placeholder: 'Sin icono',
+                showIcon: false,
+                showTodayBtn: true,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            // Ejemplo 2: Corrección color mes actual
+            selector3 = new MesSelector('selector3', 'mes3', {
+                placeholder: 'Prueba mes actual',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            // Ejemplo 3: Overlay móvil
+            selector4 = new MesSelector('selector4', 'mes4', {
+                placeholder: 'Con overlay móvil',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            // Ejemplo 4: Tema dark
+            selector5 = new MesSelector('selector5', 'mes5', {
+                placeholder: 'Dark con icono',
+                theme: 'dark',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            selector6 = new MesSelector('selector6', 'mes6', {
+                placeholder: 'Dark sin icono',
+                theme: 'dark',
+                showIcon: false,
+                showTodayBtn: false,
+                showClearBtn: true,
+                mobileOverlay: true
+            });
+            
+            // Ejemplo 5: Configuraciones múltiples
+            selectorA = new MesSelector('selectorA', 'mesA', {
+                placeholder: 'Mínima',
+                showIcon: false,
+                showTodayBtn: false,
+                showClearBtn: false,
+                showYearNav: false,
+                mobileOverlay: false
+            });
+            
+            selectorB = new MesSelector('selectorB', 'mesB', {
+                placeholder: 'Estándar',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: true,
+                showYearNav: true,
+                mobileOverlay: true
+            });
+            
+            selectorC = new MesSelector('selectorC', 'mesC', {
+                placeholder: 'Compacta',
+                theme: 'compact',
+                showIcon: true,
+                showTodayBtn: true,
+                showClearBtn: false,
+                mobileOverlay: false
+            });
+        });
+        
+        // Funciones de ejemplo 2
+        function irA2024() {
+            selector3.setValue('2024-06');
+        }
+        
+        function irA2025() {
+            selector3.setValue('2025-01');
+        }
+        
+        // Funciones de ejemplo 3
+        function toggleOverlaySetting() {
+            const config = selector4.config;
+            config.mobileOverlay = !config.mobileOverlay;
+            
+            alert(`Overlay móvil: ${config.mobileOverlay ? 'ACTIVADO' : 'DESACTIVADO'}\n\nRecarga la página para aplicar cambios.`);
+        }
+        
+        function checkMobileMode() {
+            const isMobile = window.innerWidth <= 768;
+            alert(`Modo actual:\nPantalla: ${isMobile ? 'Móvil' : 'Desktop'}\nAncho: ${window.innerWidth}px\nOverlay configurado: ${selector4.config.mobileOverlay ? 'Sí' : 'No'}`);
+        }
+        
+        // Simular redimensionamiento para probar
+        window.addEventListener('resize', function() {
+            console.log(`Ancho ventana: ${window.innerWidth}px, Móvil: ${window.innerWidth <= 768}`);
+        });
+    </script>
+</body>
+</html>
