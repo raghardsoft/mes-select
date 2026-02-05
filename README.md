@@ -476,22 +476,22 @@ try {
 ## 🔗 Enlaces y Recursos
 
 ### Demo Completa
-* 📖 [Ver Demo Interactiva](main-demo.html "demo")
-* 📚 [Documentación Web](documentacion.html "Documentacion")
+* 📖 [Ver Demo Interactiva](https://raghardsoft.github.io/mes-select/main-demo.html "demo")
+* 📚 [Documentación Web](https://raghardsoft.github.io/mes-select/documentacion.html "Documentacion")
 
 ### Archivos Principales
 
 * 📄 [mes-selector.js](mes-selector.js) - Lógica del componente
 * 🎨 [mes-selector.css](mes-selector.css) - Estilos del componente
-* 🏠 [index.html](index.html) - Página principal de ejemplo
+* 🏠 [index.html](https://raghardsoft.github.io/mes-select/index.html) - Página principal de ejemplo
 
 ### Secciones de la Demo
 
-1. [Selector Simple](main-demo.html/#simple)
-2. [Con Validación](main-demo.html/#validation)
-3. [Múltiples Selectores](main-demo.html/#multiple)
-4. [Formulario Completo](main-demo.html/#form)
-5. [Gestión SPA](main-demo.html/#spa)
+1. [Selector Simple](https://raghardsoft.github.io/mes-select/main-demo.html#simple)
+2. [Con Validación](https://raghardsoft.github.io/mes-select/main-demo.html#validation)
+3. [Múltiples Selectores](https://raghardsoft.github.io/mes-select/main-demo.html/#multiple)
+4. [Formulario Completo](https://raghardsoft.github.io/mes-select/main-demo.html#form)
+5. [Gestión SPA](https://raghardsoft.github.io/mes-select/main-demo.html#spa)
 
 ## 📝 Notas de Versión
 
@@ -593,16 +593,16 @@ Atribución apreciada pero no requerida.
 
 ## 🔗 Enlaces Rápidos
 
-- [🚀 **Demo Interactiva**](main-demo.html) - Prueba todas las funciones
-- [📚 **Documentación Web**](documentacion.html) - Guía completa
+- [🚀 **Demo Interactiva**](https://raghardsoft.github.io/mes-select/main-demo.html) - Prueba todas las funciones
+- [📚 **Documentación Web**](https://raghardsoft.github.io/mes-select/documentacion.html) - Guía completa
 - [💻 **Componente JS**](mes-selector.js) - Código fuente
 - [🎨 **Estilos CSS**](mes-selector.css) - Archivo de estilos
 
 ## 📖 Demo Online
 
 Si estás viendo esto en GitHub Pages, prueba:
-- [Demo Principal](main-demo.html)
-- [Documentación](documentacion.html)
+- [Demo Principal](https://raghardsoft.github.io/mes-select/main-demo.html)
+- [Documentación](https://raghardsoft.github.io/mes-select/documentacion.html)
 
 ## 👨‍💻 Autor
 
@@ -611,9 +611,9 @@ Desarrollado con ❤️ para simplificar la selección de meses en aplicaciones 
 <div align="center"> <p> <strong>¿Encontraste útil este componente?</strong><br> ⭐ Dale una estrella en GitHub si te gustó </p>
 
 <p>
-    <a href="main-demo.html">🔗 Ver Demo Completa</a> | 
-    <a href="#uso-rápido">🚀 Comenzar</a> | 
-    <a href="#api-de-métodos">📚 Ver API</a>
+    <a href="https://raghardsoft.github.io/mes-select/main-demo.html">🔗 Ver Demo Completa</a> | 
+    <a href="https://raghardsoft.github.io/mes-select/documentacion.html#usage">🚀 Comenzar</a> | 
+    <a href="https://raghardsoft.github.io/mes-select/documentacion.html#api">📚 Ver API</a>
 </p>
 
 </div>

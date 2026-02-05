@@ -221,21 +221,22 @@
             </div>
             
             <div class="code-block">
-// Con icono (default)
-const selector1 = new MesSelector('selector1', 'mes1', {
-    placeholder: 'Con icono 📅',
-    showIcon: true,  // Default
-    showTodayBtn: true,
-    showClearBtn: true
-});
+                // Con icono (default)<br>
+                const selector1 = new MesSelector('selector1', 'mes1', {<br>
+                    &nbsp;&nbsp; placeholder: 'Con icono 📅',<br>
+                    &nbsp;&nbsp; showIcon: true,  // Default<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: true<br>
+                });<br><br>
 
-// Sin icono
-const selector2 = new MesSelector('selector2', 'mes2', {
-    placeholder: 'Sin icono',
-    showIcon: false,  // Icono oculto
-    showTodayBtn: true,
-    showClearBtn: true
-});</div>
+                // Sin icono<br>
+                const selector2 = new MesSelector('selector2', 'mes2', {<br>
+                    &nbsp;&nbsp; placeholder: 'Sin icono',<br>
+                    &nbsp;&nbsp; showIcon: false,  // Icono oculto<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: true<br>
+                });<br>
+            </div>
         </div>
         
         <div class="demo-section">
@@ -275,16 +276,17 @@ const selector2 = new MesSelector('selector2', 'mes2', {
             </div>
             
             <div class="code-block">
-const selector4 = new MesSelector('selector4', 'mes4', {
-    placeholder: 'Prueba en móvil',
-    mobileOverlay: true,  // Default: true
-    showIcon: true,
-    showTodayBtn: true,
-    showClearBtn: true
-});
+                const selector4 = new MesSelector('selector4', 'mes4', {<br>
+                    &nbsp;&nbsp; placeholder: 'Prueba en móvil',<br>
+                    &nbsp;&nbsp; mobileOverlay: true,  // Default: true<br>
+                    &nbsp;&nbsp; showIcon: true,<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: true<br>
+                });<br><br>
 
-// Para desactivar el overlay en móvil:
-// mobileOverlay: false</div>
+                // Para desactivar el overlay en móvil:<br>
+                // mobileOverlay: false<br>
+            </div>
             
             <div class="controls">
                 <button class="btn" onclick="toggleOverlaySetting()">Alternar Overlay Móvil</button>
@@ -312,25 +314,26 @@ const selector4 = new MesSelector('selector4', 'mes4', {
             </div>
             
             <div class="code-block">
-// Tema dark con icono
-const selector5 = new MesSelector('selector5', 'mes5', {
-    placeholder: 'Dark con icono',
-    theme: 'dark',
-    showIcon: true,
-    showTodayBtn: true,
-    showClearBtn: true,
-    mobileOverlay: true
-});
+                // Tema dark con icono<br>
+                const selector5 = new MesSelector('selector5', 'mes5', {<br>
+                    &nbsp;&nbsp; placeholder: 'Dark con icono',<br>
+                    &nbsp;&nbsp; theme: 'dark',<br>
+                    &nbsp;&nbsp; showIcon: true,<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: true,<br>
+                    &nbsp;&nbsp; mobileOverlay: true<br>
+                });<br><br>
 
-// Tema dark sin icono
-const selector6 = new MesSelector('selector6', 'mes6', {
-    placeholder: 'Dark sin icono',
-    theme: 'dark',
-    showIcon: false,
-    showTodayBtn: false,
-    showClearBtn: true,
-    mobileOverlay: true
-});</div>
+                // Tema dark sin icono<br>
+                const selector6 = new MesSelector('selector6', 'mes6', {<br>
+                    &nbsp;&nbsp; placeholder: 'Dark sin icono',<br>
+                    &nbsp;&nbsp; theme: 'dark',<br>
+                    &nbsp;&nbsp; showIcon: false,<br>
+                    &nbsp;&nbsp; showTodayBtn: false,<br>
+                    &nbsp;&nbsp; showClearBtn: true,<br>
+                    &nbsp;&nbsp; mobileOverlay: true<br>
+                });<br>
+            </div>
         </div>
         
         <div class="demo-section">
@@ -360,77 +363,79 @@ const selector6 = new MesSelector('selector6', 'mes6', {
             </div>
             
             <div class="code-block">
-// Configuración A: Mínima
-const selectorA = new MesSelector('selectorA', 'mesA', {
-    placeholder: 'Mínima',
-    showIcon: false,
-    showTodayBtn: false,
-    showClearBtn: false,
-    showYearNav: false,
-    mobileOverlay: false
-});
+                // Configuración A: Mínima<br>
+                const selectorA = new MesSelector('selectorA', 'mesA', {<br>
+                    &nbsp;&nbsp; placeholder: 'Mínima',<br>
+                    &nbsp;&nbsp; showIcon: false,<br>
+                    &nbsp;&nbsp; showTodayBtn: false,<br>
+                    &nbsp;&nbsp; showClearBtn: false,<br>
+                    &nbsp;&nbsp; showYearNav: false,<br>
+                    &nbsp;&nbsp; mobileOverlay: false<br>
+                });<br><br>
 
-// Configuración B: Estándar
-const selectorB = new MesSelector('selectorB', 'mesB', {
-    placeholder: 'Estándar',
-    showIcon: true,
-    showTodayBtn: true,
-    showClearBtn: true,
-    showYearNav: true,
-    mobileOverlay: true
-});
+                // Configuración B: Estándar<br>
+                const selectorB = new MesSelector('selectorB', 'mesB', {<br>
+                    &nbsp;&nbsp; placeholder: 'Estándar',<br>
+                    &nbsp;&nbsp; showIcon: true,<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: true,<br>
+                    &nbsp;&nbsp; showYearNav: true,<br>
+                    &nbsp;&nbsp; mobileOverlay: true<br>
+                });<br><br>
 
-// Configuración C: Compacta
-const selectorC = new MesSelector('selectorC', 'mesC', {
-    placeholder: 'Compacta',
-    theme: 'compact',
-    showIcon: true,
-    showTodayBtn: true,
-    showClearBtn: false,
-    mobileOverlay: false
-});</div>
+                // Configuración C: Compacta<br>
+                const selectorC = new MesSelector('selectorC', 'mesC', {<br>
+                    &nbsp;&nbsp; placeholder: 'Compacta',<br>
+                    &nbsp;&nbsp; theme: 'compact',<br>
+                    &nbsp;&nbsp; showIcon: true,<br>
+                    &nbsp;&nbsp; showTodayBtn: true,<br>
+                    &nbsp;&nbsp; showClearBtn: false,<br>
+                    &nbsp;&nbsp; mobileOverlay: false<br>
+                });<br>
+            </div>
         </div>
         
         <div class="demo-section">
             <h2>📚 Todas las Opciones Disponibles</h2>
             
             <div class="code-block">
-new MesSelector(containerId, inputId, {
-    // Icono y apariencia
-    showIcon: true,         // Mostrar icono de calendario
-    theme: 'default',       // 'default', 'dark', 'compact'
-    
-    // Controles visibles
-    showTodayBtn: true,     // Mostrar botón "Mes actual"
-    showClearBtn: true,     // Mostrar botón "Limpiar"
-    showYearNav: true,      // Mostrar navegación de años
-    
-    // Comportamiento móvil
-    mobileOverlay: true,    // Usar overlay en móviles
-    
-    // Fechas límite
-    minDate: '2020-01',     // String 'YYYY-MM' o Date
-    maxDate: '2030-12',     // String 'YYYY-MM' o Date
-    
-    // Opciones básicas
-    placeholder: 'Selecciona un mes',
-    required: false,
-    locale: 'es',           // 'es' o 'en'
-    disabled: false,
-    
-    // Callbacks
-    onChange: function(value, date) {
-        // value: 'YYYY-MM' (para MySQL)
-        // date: Date object
-    }
-});
+                new MesSelector(containerId, inputId, {<br>
+                    &nbsp;&nbsp; // Icono y apariencia<br>
+                    &nbsp;&nbsp; showIcon: true,         // Mostrar icono de calendario<br>
+                    &nbsp;&nbsp; theme: 'default',       // 'default', 'dark', 'compact'<br>
+                    <br>
+                    &nbsp;&nbsp; // Controles visibles<br>
+                    &nbsp;&nbsp; showTodayBtn: true,     // Mostrar botón "Mes actual"<br>
+                    &nbsp;&nbsp; showClearBtn: true,     // Mostrar botón "Limpiar"<br>
+                    &nbsp;&nbsp; showYearNav: true,      // Mostrar navegación de años<br>
+                    <br>
+                    &nbsp;&nbsp; // Comportamiento móvil<br>
+                    &nbsp;&nbsp; mobileOverlay: true,    // Usar overlay en móviles<br>
+                    <br>
+                    &nbsp;&nbsp; // Fechas límite<br>
+                    &nbsp;&nbsp; minDate: '2020-01',     // String 'YYYY-MM' o Date<br>
+                    &nbsp;&nbsp; maxDate: '2030-12',     // String 'YYYY-MM' o Date<br>
+                    <br>
+                    &nbsp;&nbsp; // Opciones básicas<br>
+                    &nbsp;&nbsp; placeholder: 'Selecciona un mes',<br>
+                    &nbsp;&nbsp; required: false,<br>
+                    &nbsp;&nbsp; locale: 'es',           // 'es' o 'en'<br>
+                    &nbsp;&nbsp; disabled: false,<br>
+                    <br>
+                    &nbsp;&nbsp; // Callbacks<br>
+                    &nbsp;&nbsp; onChange: function(value, date) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp; // value: 'YYYY-MM' (para MySQL)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp; // date: Date object<br>
+                    &nbsp;&nbsp; }<br>
+                });<br><br>
 
-// Ejemplos prácticos:
-// 1. Selector limpio: {showIcon: false, showTodayBtn: false, showClearBtn: false}
-// 2. Solo lectura: {disabled: true}
-// 3. Para formularios: {required: true, showClearBtn: false}
-// 4. En móvil sin overlay: {mobileOverlay: false}
-// 5. Tema oscuro compacto: {theme: 'dark', showIcon: false}</div>
+                // Ejemplos prácticos:<br>
+                // 1. Selector limpio: {showIcon: false, showTodayBtn: false, showClearBtn: false}<br>
+                // 2. Solo lectura: {disabled: true}<br>
+                // 3. Para formularios: {required: true, showClearBtn: false}<br>
+                // 4. En móvil sin overlay: {mobileOverlay: false}<br>
+                // 5. Tema oscuro compacto: {theme: 'dark', showIcon: false}<br>
+            </div>
         </div>
     </div>
     

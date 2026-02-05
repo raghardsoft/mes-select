@@ -133,6 +133,7 @@
             background: linear-gradient(135deg, var(--primary), var(--info));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero p {
@@ -501,7 +502,7 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-container">
+        <div class="header-container" id="inicio">
             <a href="#" class="logo">
                 <i class="fas fa-calendar-alt"></i>
                 MesSelector
@@ -1157,12 +1158,12 @@ document.getElementById('form').addEventListener('submit', function(e) {
         </div>
         
         <div class="copyright">
-            <p>© 2024 MesSelector - Componente desarrollado para selección de meses. Todos los ejemplos son funcionales y listos para producción.</p>
+            <p>© 2026 MesSelector - Componente desarrollado para selección de meses. Todos los ejemplos son funcionales y listos para producción.</p>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#" class="back-to-top">
+    <a href="#inicio" class="back-to-top" title="Volver arriba">
         <i class="fas fa-arrow-up"></i>
     </a>
 
