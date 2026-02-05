@@ -174,8 +174,22 @@ class MesSelector {
             window._mesSelectors = window._mesSelectors || [];
             window._mesSelectors.push(this);
         }
+
+        this.isTouchDevice = this.detectTouchDevice();
+        this.isIOS = this.detectIOS();
     }
     
+    // Métodos para detectar dispositivo:
+    detectTouchDevice() {
+        return (('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0) ||
+            (navigator.msMaxTouchPoints > 0));
+    }
+
+    detectIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+
     detectMobile() {
         return window.innerWidth <= 768;
     }
@@ -375,8 +389,71 @@ class MesSelector {
             this._formResetHandler = resetHandler;
             form.addEventListener('reset', resetHandler);
         }
+        if (this.isTouchDevice) {
+            this.setupTouchEvents();
+        }
     }
     
+    setupTouchEvents() {
+        // Configurar eventos táctiles para botones
+        const setupButtonTouch = (button) => {
+            if (!button) return;
+            
+            button.addEventListener('touchstart', (e) => {
+                if (this.isTouchDevice) {
+                    button.classList.add('active-touch');
+                    e.preventDefault();
+                }
+            });
+            
+            button.addEventListener('touchend', (e) => {
+                if (this.isTouchDevice) {
+                    button.classList.remove('active-touch');
+                    
+                    // Para iOS, resetear estilos
+                    if (this.isIOS) {
+                        button.classList.add('ios-touch');
+                        setTimeout(() => {
+                            button.classList.remove('ios-touch');
+                        }, 300);
+                    }
+                }
+            });
+            
+            button.addEventListener('touchcancel', (e) => {
+                if (this.isTouchDevice) {
+                    button.classList.remove('active-touch', 'ios-touch');
+                }
+            });
+        };
+        
+        // Aplicar a todos los botones relevantes
+        [this.prevYearBtn, this.nextYearBtn, this.todayBtn, this.clearBtn].forEach(setupButtonTouch);
+        
+        // Para botones de mes (delegación de eventos)
+        this.monthsGrid.addEventListener('touchstart', (e) => {
+            const btn = e.target.closest('.mes-grid-btn');
+            if (btn && this.isTouchDevice) {
+                btn.classList.add('active-touch');
+                e.preventDefault();
+            }
+        });
+        
+        this.monthsGrid.addEventListener('touchend', (e) => {
+            const btn = e.target.closest('.mes-grid-btn');
+            if (btn && this.isTouchDevice) {
+                btn.classList.remove('active-touch');
+                
+                if (this.isIOS) {
+                    btn.classList.add('ios-touch');
+                    setTimeout(() => {
+                        btn.classList.remove('ios-touch');
+                    }, 300);
+                }
+            }
+        });
+    }
+
     removeEvents() {
         // Remover listeners del contenedor
         if (this._clickHandler) {
@@ -408,6 +485,17 @@ class MesSelector {
             this.options.style.transform = 'translate(-50%, -50%)';
             this.options.style.width = '90vw';
             this.options.style.maxWidth = '320px';
+
+            // Para iOS, ajustar la posición para evitar que se abra donde se tocó
+            if (this.isIOS()) {
+                // Calcular posición segura (no exactamente donde se tocó)
+                const viewportHeight = window.innerHeight;
+                const selectorHeight = this.options.offsetHeight;
+                const safeTop = Math.max(20, (viewportHeight - selectorHeight) / 2);
+                
+                this.options.style.top = `${safeTop}px`;
+                this.options.style.transform = 'translate(-50%, 0)';
+            }
         } else {
             this.options.style.position = 'absolute';
             this.options.style.top = 'calc(100% + 8px)';
@@ -550,10 +638,24 @@ class MesSelector {
             this.createOverlay();
             this.overlay.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            // Para iOS, agregar clase al body
+            if (this.isIOS) {
+                document.body.classList.add('mes-selector-open');
+            }
         }
         
         this.positionOptions();
         
+        // Forzar reflow en iOS para prevenir problemas visuales
+        if (this.isIOS()) {
+            void this.options.offsetWidth;
+            
+            // Pequeño delay para asegurar que iOS procese los estilos
+            setTimeout(() => {
+                this.positionOptions();
+            }, 10);
+        }
+
         if (typeof this.config.onOpen === 'function') {
             this.config.onOpen();
         }
@@ -572,6 +674,9 @@ class MesSelector {
         
         this.removeOverlay();
         document.body.style.overflow = '';
+        if (this.isIOS) {
+            document.body.classList.remove('mes-selector-open');
+        }
         
         if (typeof this.config.onClose === 'function') {
             this.config.onClose();

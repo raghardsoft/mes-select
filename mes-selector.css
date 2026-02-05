@@ -167,6 +167,7 @@
     font-size: 14px;
     color: #666;
     transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .mes-nav-btn:hover:not(:disabled) {
@@ -199,6 +200,9 @@
     color: #444;
     transition: all 0.2s ease;
     text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+    position: relative; /* Para manejo de estados táctiles */
 }
 
 .mes-grid-btn:hover:not(:disabled) {
@@ -264,6 +268,7 @@
     font-weight: 500;
     font-size: 14px;
     transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .mes-today-btn {
@@ -468,7 +473,7 @@
     }
     
     /* En móvil, el selector se posiciona fixed con overlay */
-    .mes-options.mobile-fixed {
+    .mes-options {
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
@@ -478,20 +483,54 @@
         max-height: 80vh !important;
         overflow-y: auto !important;
         z-index: 1000 !important;
+        animation: mesSlideUp 0.3s ease-out;
+    }
+    
+    @keyframes mesSlideUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -40%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
     }
     
     .mes-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
+        gap: 8px;
     }
     
     .mes-grid-btn {
-        padding: 10px 6px;
+        padding: 12px 6px;
         font-size: 13px;
+        min-height: 44px; /* Tamaño táctil mínimo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: transparent;
     }
     
     .mes-buttons {
         flex-direction: column;
+    }
+    
+    .mes-nav-btn {
+        min-width: 44px;
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .mes-year-section {
+        gap: 15px; /* Más espacio para prevenir toques accidentales */
+    }
+    
+    /* Reset hover en móvil */
+    .mes-nav-btn:hover,
+    .mes-grid-btn:hover,
+    .mes-action-btn:hover {
+        transform: none;
     }
     
     /* Header sin icono en móvil si está configurado así */
@@ -536,4 +575,116 @@
 
 .mes-selector-header.no-icon .icon {
     display: none;
+}
+
+/* =========================================== */
+/* CORRECCIONES PARA MÓVIL - AGREGAR AL FINAL */
+/* =========================================== */
+
+/* 1. Eliminar hover en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .mes-nav-btn:hover,
+    .mes-grid-btn:hover,
+    .mes-action-btn:hover {
+        transform: none !important;
+        background: inherit !important;
+    }
+    
+    .mes-selector-header:hover {
+        border-color: #ddd !important;
+        box-shadow: none !important;
+    }
+}
+
+/* 2. Mejor manejo para iOS */
+@supports (-webkit-touch-callout: none) {
+    .mes-options {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Deshabilitar efectos hover persistentes en iOS */
+    .mes-nav-btn.ios-touch,
+    .mes-grid-btn.ios-touch,
+    .mes-action-btn.ios-touch {
+        background: inherit !important;
+        transform: none !important;
+        border-color: inherit !important;
+    }
+}
+
+/* 3. Estados active para reemplazar hover en táctiles */
+.mes-nav-btn:active {
+    background: #6c63ff !important;
+    color: white !important;
+    transform: scale(1.1) !important;
+}
+
+.mes-grid-btn:active:not(:disabled) {
+    border-color: #6c63ff !important;
+    background: #f8f7ff !important;
+    transform: translateY(-2px) !important;
+}
+
+.mes-today-btn:active {
+    background: #388E3C !important;
+}
+
+.mes-clear-btn:active {
+    background: #e0e0e0 !important;
+}
+
+/* 4. Media query específica para dispositivos táctiles */
+@media (pointer: coarse) {
+    .mes-nav-btn:hover,
+    .mes-grid-btn:hover,
+    .mes-action-btn:hover,
+    .mes-selector-header:hover {
+        /* Resetear todos los estilos hover en táctiles */
+        border-color: inherit !important;
+        background: inherit !important;
+        color: inherit !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* 5. Clases para manejo táctil (se agregan con JS) */
+.mes-grid-btn.active-touch {
+    border-color: #6c63ff !important;
+    background: #f8f7ff !important;
+}
+
+.mes-grid-btn.touch-reset {
+    border-color: #f0f0f0 !important;
+    background: white !important;
+    transform: none !important;
+}
+
+/* 6. Mejoras para el overlay en móvil */
+body.mes-selector-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* 7. Ajustes específicos para iOS dentro del responsive existente */
+@media (max-width: 768px) {
+    /* Asegurar tamaño táctil mínimo */
+    .mes-nav-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .mes-grid-btn {
+        min-height: 44px;
+    }
+    
+    /* Mejorar el feedback visual en táctiles */
+    .mes-nav-btn,
+    .mes-grid-btn,
+    .mes-action-btn {
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 0.1s, background-color 0.1s;
+    }
 }
