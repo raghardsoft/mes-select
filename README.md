@@ -489,7 +489,7 @@ try {
 
 1. [Selector Simple](https://raghardsoft.github.io/mes-select/main-demo.html#simple)
 2. [Con Validación](https://raghardsoft.github.io/mes-select/main-demo.html#validation)
-3. [Múltiples Selectores](https://raghardsoft.github.io/mes-select/main-demo.html/#multiple)
+3. [Múltiples Selectores](https://raghardsoft.github.io/mes-select/main-demo.html#multiple)
 4. [Formulario Completo](https://raghardsoft.github.io/mes-select/main-demo.html#form)
 5. [Gestión SPA](https://raghardsoft.github.io/mes-select/main-demo.html#spa)
 
