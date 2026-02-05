@@ -91,10 +91,10 @@ Link del Proyecto: https://github.com/raghardsoft/mes-selector
 <div align="center"> <p>Hecho con ❤️ para la comunidad de desarrollo web</p>
 
 <p>
-    <a href="main-demo.html">
+    <a href="https://raghardsoft.github.io/mes-select/main-demo.html">
         <img src="https://img.shields.io/badge/🚀-Ver_Demo_Completa-blue" alt="Ver Demo">
     </a>
-    <a href="documentacion.html">
+    <a href="https://raghardsoft.github.io/mes-select/documentacion.html">
         <img src="https://img.shields.io/badge/📚-Documentación_Completa-green" alt="Documentación">
     </a>
 </p>
